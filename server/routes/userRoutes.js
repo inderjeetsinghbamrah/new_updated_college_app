@@ -1,11 +1,12 @@
 import express from "express"
-import { getAdminUser } from "../controllers/adminController.js"
+import { deleteUser, getAdminUser } from "../controllers/adminController.js"
 import { isAdmin } from "../middlewares/authMiddleware.js"
 
 const router = express.Router()
 
 //Admin Page
-router.get('/getAdminUser',isAdmin, getAdminUser)
+router.get('/getAdminUser', isAdmin, getAdminUser)
+router.get('/deleteUser/:id',isAdmin,deleteUser)
 
 //Staff Page
 router.get('/teacher', (req, res) => {
