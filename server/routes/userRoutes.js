@@ -1,6 +1,7 @@
 import express from "express"
 import { deleteUser, getAdminUser } from "../controllers/adminController.js"
 import { isAdmin } from "../middlewares/authMiddleware.js"
+import { changePassword } from "../controllers/commonController.js"
 
 const router = express.Router()
 
@@ -18,5 +19,8 @@ router.get('/teacher', (req, res) => {
 router.get('/student', (req, res) => {
     res.send('Student page')
 })
+
+//Common Routes
+router.post('/changePassword', changePassword)
 
 export default router
