@@ -27,17 +27,16 @@ const login = async(req,res) => {
     const { username, password } = req.body
 
     try {
-        const user = await prisma.user.findUnique({
+        const { id, role, ...user } = await prisma.user.findUnique({
             where: {
                 username,
             }
         })
-
         //compare password
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         const token = jwt.sign(
-            { id: user.id, role: user.role },
+            { id, role },
             process.env.JWT_SECRET_KEY,
             {expiresIn:"1h"}
         )
@@ -45,7 +44,7 @@ const login = async(req,res) => {
             httpOnly: true,
             secure: false,
             maxAge:3600000
-        }).status(200).json({ message: "User found", token }) : res.status(400).json({ message: "Invalid Credentials" })
+        }).status(200).json({ message: "User found", token, role, username }) : res.status(400).json({ message: "Invalid Credentials" })
     } catch (error) {
         console.log(error)
         res.status(500).json({message:"user login failed"})

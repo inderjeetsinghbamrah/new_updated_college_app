@@ -17,10 +17,129 @@ model User{
     id    Int @id @default(autoincrement())
     username    String @unique
     password    String
+    email       String
+    mobile      BigInt
     role    Roles @default(User)
+    active      Boolean @default(true)
+}
+
+model Student{
+    id Int @id @default(autoincrement())
+    classRoll String
+    boardRegNo BigInt @unique @default(0)
+    batch Int
+    course Course
+    branch Branch
+    leet Boolean @default(false)
+    semester Int
+    admission_date DateTime @db.Date
+    counsellingMode CounsellingMode
+    onlineCounsellingNo Int?
+    seat_type SeatType
+    name String
+    fatherName String
+    motherName String
+    dob DateTime @db.Date
+    mobile BigInt
+    email String
+    parentMobile BigInt
+    bloodGroup String
+    studentCategory Category
+    scholarshipType ScholarshipType
+    adhaarNo BigInt @unique
+    isEligibleVoter Boolean
+    epicNo String?
+    address String
+    familyOccupation String
+    familyIncome Int
+    onRollStatus Status
+    dataInsertAt DateTime @default(now()) @db.Date
+    dataValidated Boolean @default(false)
+}
+
+model Qualification{
+    id Int @id @default(autoincrement())
+    matricBoardName MatricBoardName
+    matricSchoolName String
+    matricRegNo String @unique
+    matricTotalMarks Int
+    matricObtainedMarks Int
+    matricPercentage Int
+    secondaryQualificationType SecondaryQualificationType?
+    secondaryQualificationBoardName String?
+    secondaryQualificationRegNo String? @unique
+    secondaryQualificationTotalMarks Int?
+    secondaryQualificationObtainedMarks Int?
+    secondaryQualificationPercentage Int? @default(0)
+}
+
+enum SeatType{
+    Punjab_85
+    Other_15
+}
+enum CounsellingMode{
+    Offline
+    Online
+}
+enum SecondaryQualificationType{
+    NonMedical
+    Medical
+    Vocational_Technical
+    Vocational_Non_Technical
+    ITI
+    DiplomaAny
+}
+
+enum Status{
+    onRoll
+    ex
+    dropped
+}
+enum MatricBoardName{
+    PSEB
+    CBSE
+    ICSE
+    OpenSchool
+    Other
+}
+
+enum Branch{
+    AA @map("Architecture Assistantship")
+    CE @map("Civil Engineering")
+    CSE @map("Computer Science and Engineering")
+    ECE @map("Electronics and Communication Engg.")
+    EE @map("Electrical Engineering")
+    IT @map("Information Technology")
+    ME @map("Mechanical Engineering")
+    ME_P @map("Mechanical Engineering (Production)")
+    Pharmacy
+}
+
+enum Course{
+    B_Tech @map("B.Tech.")
+    M_Tech @map("M.Tech.")
+    Diploma
+}
+
+enum ScholarshipType{
+    Full_Fee
+    CMS_100
+    CMS_90
+    CMS_80
+    CMS_70
+    FWS
+    PMS
+}
+
+enum Category{
+    General
+    OBC @map("O.B.C.")
+    SC_ST @map("S.C./ S.T.")
+    Other
 }
 
 enum Roles{
     Admin
     User
+    Student
 }
