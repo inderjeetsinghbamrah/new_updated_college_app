@@ -10,9 +10,10 @@ const Logout = () => {
     const [user, setUser] = useRecoilState(userState);
     const navigate = useNavigate();
 
+    const logoutAPI= import.meta.env.VITE_LOGOUT_API
     const handleLogout = async() => {
         try {
-            const response = await axios.post("http://localhost:7001/api/auth/logout");
+            const response = await axios.post(logoutAPI);
 
             if (response.status == 200)
                 {

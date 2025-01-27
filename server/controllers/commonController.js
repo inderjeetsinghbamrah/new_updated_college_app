@@ -17,7 +17,7 @@ const changePassword = async (req, res) => {
     })
     !userInfo &&
         res.status(401).json({ message: "User not found" })
-    
+
     const isPasswordMatch = await bcrypt.compare(currentPassword, userInfo.password)
 
     !isPasswordMatch && res.status(401).json({message:"Current Password is Wrong"})

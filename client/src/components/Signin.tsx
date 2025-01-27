@@ -19,6 +19,9 @@ const signInSchema = z.object({
 });
 
 type SignInFormValues= z.infer<typeof signInSchema>
+const loginAPI = import.meta.env.VITE_LOGIN_API;
+
+console.log(loginAPI)
 
 const Signin: React.FC = () => {
     const navigate = useNavigate();
@@ -33,7 +36,7 @@ const Signin: React.FC = () => {
         validateOnBlur:false,
         onSubmit:async(values,{setSubmitting,setErrors}) => {
             try {
-                const response = await axios.post("http://localhost:7001/api/auth/login", values);
+                const response = await axios.post(loginAPI, values);
                 const { role, username } = response.data;
 
                 setUser({ isAuthenticated: true, role, username })
