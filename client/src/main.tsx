@@ -4,12 +4,16 @@ import './index.css'
 import App from './App.tsx'
 import { RecoilRoot } from 'recoil'
 import { ToastContainer } from 'react-toastify'
+import { ThemeProvider } from './context/ThemeContext.tsx'
+
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <RecoilRoot>
-            <ToastContainer autoClose={1000} hideProgressBar={true} />
-            <App />
-        </RecoilRoot>
+        <ThemeProvider>
+            <RecoilRoot>
+                <ToastContainer autoClose={1000} hideProgressBar={true} />
+                <App />
+            </RecoilRoot>
+       </ThemeProvider>
     </StrictMode>,
 )

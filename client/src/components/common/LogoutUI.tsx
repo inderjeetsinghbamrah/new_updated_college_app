@@ -1,9 +1,8 @@
-import React from 'react'
 import { Button } from '../ui/button'
 import { Dialog,DialogClose,DialogContent,DialogDescription,DialogTrigger,DialogTitle,DialogFooter } from '../ui/dialog'
-import Logout from '../Logout'
+import Logout from './Logout'
 
-const Menu = () => {
+const LogoutUI = () => {
     return (
         <div>
             <Dialog>
@@ -26,4 +25,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default LogoutUI

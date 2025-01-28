@@ -2,7 +2,7 @@ import { userState } from '@/stores/userStore'
 import { useRecoilState } from 'recoil'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 

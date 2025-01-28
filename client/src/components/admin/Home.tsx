@@ -1,10 +1,10 @@
 import { userState } from '@/stores/userStore'
 import { useRecoilValue } from 'recoil'
-import Menu from '../common/Menu'
+import LogoutUI from '../common/LogoutUI'
 import { AppSidebar } from '../app-sidebar'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../ui/breadcrumb'
-import { Separator } from '../ui/separator'
-import { SidebarInset,SidebarProvider,SidebarTrigger } from '../ui/sidebar'
+import { SidebarInset, SidebarProvider } from '../ui/sidebar'
+import TopMenu from '../common/TopMenu'
+
 export const Home = () => {
 
     const user = useRecoilValue(userState)
@@ -13,28 +13,12 @@ export const Home = () => {
         <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-[#20787A] text-white">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
+        <TopMenu/>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div className="aspect-video rounded-xl bg-muted/50">
                 Admin Home. Welcome {user.username}
-                            <Menu />
+                            <LogoutUI />
 
                 </div>
             <div className="aspect-video rounded-xl bg-muted/50" />

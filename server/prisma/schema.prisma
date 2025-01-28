@@ -73,6 +73,31 @@ model Qualification{
     secondaryQualificationPercentage Int? @default(0)
 }
 
+model Role {
+  id    Int    @id @default(autoincrement()) // Primary key
+  name  String // Role name (Admin, Student, Teacher)
+  isActive Boolean @default(true)
+  menus Menu[] // Relationship to the Menu table
+}
+
+model Menu {
+  id        Int      @id @default(autoincrement()) // Primary key
+  name      String   // Menu name
+  icon      String?  // Menu icon
+  route     String   // Route for the menu
+  parentId  Int?     // Parent menu ID for submenus
+  order     Int      // Menu order
+  isActive  Boolean  @default(true) // Is menu active
+  createdAt DateTime @default(now()) // Created timestamp
+  updatedAt DateTime @updatedAt // Updated timestamp
+  roleId    Int      // Reference to Role table
+
+  parent    Menu?    @relation("SubMenus", fields: [parentId], references: [id])
+  children  Menu[]   @relation("SubMenus")
+  role      Role     @relation(fields: [roleId], references: [id]) // Relation to the Role table
+}
+
+
 enum SeatType{
     Punjab_85
     Other_15

@@ -5,7 +5,7 @@ import Signin from "./components/Signin.tsx"
 import { ProtectedRoute } from "./components/ProtectedRoute.tsx"
 import { Home as AdminHome } from "./components/admin/Home.tsx"
 import {Home as TeacherHome} from "./components/teacher/Home.tsx"
-import Logout from "./components/Logout.tsx"
+import Logout from "./components/common/Logout.tsx"
 const App = () => {
     const user = useRecoilValue(userState)
 
