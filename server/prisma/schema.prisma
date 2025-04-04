@@ -19,7 +19,8 @@ model User{
     password    String
     email       String
     mobile      BigInt
-    role    Roles @default(User)
+    roleId      Int
+    role        Role     @relation(fields: [roleId], references: [id])
     active      Boolean @default(true)
 }
 
@@ -78,6 +79,7 @@ model Role {
   name  String // Role name (Admin, Student, Teacher)
   isActive Boolean @default(true)
   menus Menu[] // Relationship to the Menu table
+  users User[]
 }
 
 model Menu {

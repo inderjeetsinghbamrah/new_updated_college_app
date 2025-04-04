@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import { PrismaClient } from "@prisma/client"
 
 const register = async (req, res) => {
-    const { username, password, role, email, mobile } = req.body
+    const { username, password, roleId, email, mobile } = req.body
     const prisma = new PrismaClient()
     const hashedPassword= await bcrypt.hashSync(password,10)
     try {
@@ -11,7 +11,7 @@ const register = async (req, res) => {
             data: {
                 username,
                 password: hashedPassword,
-                role,
+                roleId,
                 email,
                 mobile
             }
@@ -29,11 +29,16 @@ const login = async(req,res) => {
     const { username, password } = req.body
 
     try {
-        const { id, role, ...user } = await prisma.user.findUnique({
+        const { id, roleId,role, ...user } = await prisma.user.findUnique({
             where: {
                 username,
-            }
+            },
+            include: { roleId: true }
         })
+
+        console.log(roleId)
+
+
         //compare password
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
